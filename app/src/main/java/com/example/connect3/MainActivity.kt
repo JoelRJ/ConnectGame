@@ -55,6 +55,9 @@ class MainActivity : AppCompatActivity() {
     // Check board logic to determine winner
     fun checkBoard(arrayIn : Array<Array<Int>>) {
         var sum = 0
+        val yellowWin = "Yellow won!"
+        val redWin = "Red won!"
+        val resetText = "Reset board to play again."
 //        arrayIn.forEach { array ->
 //            array.forEach {
 //                sum += it
@@ -79,9 +82,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (sum == 3) {
-                    winnerText.text = "Yellow"
+                    winnerText.text = yellowWin
                 } else if (sum == 12) {
-                    winnerText.text = "Red"
+                    winnerText.text = redWin
                 }
 
                 sum = 0
@@ -92,9 +95,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (sum == arrayIn[0].size) {
-                    winnerText.text = "Yellow"
+                    winnerText.text = yellowWin
                 } else if (sum == arrayIn[0].size * 4) {
-                    winnerText.text = "Red"
+                    winnerText.text = redWin
                 }
                 sum = 0
             }
@@ -104,9 +107,9 @@ class MainActivity : AppCompatActivity() {
                 sum += arrayIn[x][x]
             }
             if (sum == arrayIn[0].size) {
-                winnerText.text = "Yellow"
+                winnerText.text = yellowWin
             } else if (sum == arrayIn[0].size * 4) {
-                winnerText.text = "Red"
+                winnerText.text = redWin
             }
             sum = 0
 
@@ -115,10 +118,14 @@ class MainActivity : AppCompatActivity() {
                 sum += arrayIn[x][2 - x]
             }
             if (sum == arrayIn[0].size) {
-                winnerText.text = "Yellow"
+                winnerText.text = yellowWin
             } else if (sum == arrayIn[0].size * 4) {
-                winnerText.text = "Red"
+                winnerText.text = redWin
             }
+        }
+
+        if (winnerText.text != "") {
+            resetPrompt.text = resetText
         }
     }
 
@@ -128,6 +135,7 @@ class MainActivity : AppCompatActivity() {
         board = Array(3) {Array(3) {0} }
         isYellow = false
         winnerText.text = ""
+        resetPrompt.text = ""
 
         // Loop through all image elements on page and set image resource to blank, and tag to "empty"
         var layout = tableLayout
